@@ -1,0 +1,29 @@
+.created {
+  color: blue;
+  animation: enter 0.5s ease-out;
+}
+
+.selected {
+  animation: salute 0.2s;
+}
+
+@keyframes enter {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes salute {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

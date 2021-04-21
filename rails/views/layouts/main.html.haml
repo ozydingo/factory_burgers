@@ -1,0 +1,22 @@
+!!! XML
+!!! Strict
+%html{xmlns: "http://www.w3.org/1999/xhtml"}
+  %head
+    %title== 3Play Media &raquo; #{yield(:title)}
+    %meta{'http-equiv': "Content-Type", content: "text/html; charset=utf-8"}
+    = favicon_link_tag(FAVICON, {})
+    = stylesheet_link_tag 'vendor/bootstrap.4.0.0.min'
+    = stylesheet_link_tag 'testing/layout'
+    = javascript_include_tag 'vendor/bootstrap.4.1.3.min'
+    = javascript_pack_tag 'application'
+    = csrf_meta_tag
+    = yield(:head)
+  %body
+    %header
+      .header-text
+        testing
+    %main
+      = yield
+
+  = javascript_tag do
+    = yield(:javascript)
