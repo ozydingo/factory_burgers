@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'Special Elite';
+  src: url('./fonts/SpecialElite-Regular.ttf');
+}
+
+header {
+  width: calc(100vw - 50px);
+  height: 50px;
+  text-align: right;
+  font-size: 2.5em;
+  font-family: 'Special Elite', 'Times New Roman', serif;
+  border-bottom: 2px solid #222222;
+  margin-bottom: 1em;
+  padding: 0 1em;
+  position: relative;
+}
+
+.header-text {
+    position: absolute;
+    bottom: -0.5em;
+    right: -35px;
+    transform: rotate(10deg);
+    animation: headerEnter 0.15s ease-out 1s both, headerTilt 0.15s ease-in-out 1.4s both;
+}
+
+main {
+  font-family: 'Special Elite', sans-serif;
+}
+
+@keyframes headerEnter {
+  0% {
+    right: 70px;
+  }
+  100% {
+    right: -35px;
+  }
+}
+
+@keyframes headerTilt {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(10deg)
+  }
+}
