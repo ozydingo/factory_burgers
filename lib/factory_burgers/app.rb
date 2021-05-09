@@ -1,19 +1,13 @@
+Dir[Pathname(__dir__).join("middleware/*")].each do |file|
+  require file
+end
+
 module FactoryBurgers
-  class App
-    def call(env)
-      static_app.call(env)
+  App = Rack::Builder.new do
+    map "/data" do
+      run Middleware::Data.new
     end
 
-    def static_app
-      Rack::Static.new(nil, static_options)
-    end
-
-    def static_options
-      {urls: [""], root: asset_path, index: 'index.html'}
-    end
-
-    def asset_path
-      @asset_path ||= FactoryBurgers.root.join("assets/")
-    end
+    run Middleware::Static.new
   end
 end

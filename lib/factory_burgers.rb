@@ -1,4 +1,4 @@
-Dir[Pathname(__dir__).join("factory_burgers/*")].each do |file|
+Dir[Pathname(__dir__).join("factory_burgers/*.rb")].each do |file|
   require file
 end
 
