@@ -1,12 +1,12 @@
 FactoryBot.define do
-  FIRSTNAMES = %w[Alice Bob Claire Dylan]
-  LASTNAME = %w[Doe Smith Johnson]
   sequence :user_firstname do |ii|
-    FIRSTNAMES[ii % FIRSTNAMES.length]
+    firstnames = %w[Alice Bob Claire Dylan]
+    firstnames[ii % firstnames.length]
   end
 
   sequence :user_lastname do |ii|
-    LASTNAMES[ii % LASTNAMES.length]
+    lastnames = %w[Doe Smith Johnson]
+    lastnames[ii % lastnames.length]
   end
 
   sequence :user_email do |ii|
