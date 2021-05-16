@@ -1,6 +1,7 @@
 import './App.css';
 import './layout.css';
 
+import * as api from "./api";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
         <div class="header-text">testing</div>
       </header>
       <main>
-        Hello, world.
+        <p>Hello, world.</p>
+        <button class="btn btn-primary" onClick={api.index}>Get Factories</button>
       </main>
     </div>
   );

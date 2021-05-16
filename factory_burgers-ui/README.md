@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Build
+
+```
+npm run build
+```
+
+This builds the assets and copies them into the static asset directory for the gem.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
