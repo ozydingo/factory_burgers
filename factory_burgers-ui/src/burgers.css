@@ -1,0 +1,137 @@
+:root {
+  --ketchup: #a90409;
+  --mayo: #ede5cc;
+  --relish: #648813;
+  --mustard: #d8be07;
+  --aioli: #ebd481;
+  --dark: #222;
+}
+
+.form-control:disabled {
+  background-color: var(--mayo);
+}
+
+.btn.btn-primary {
+  background-color: var(--relish);
+  color: var(--mayo);
+  border-color: var(--dark);
+}
+.btn.btn-primary:hover {
+  background-color: var(--mustard);
+  color: var(--dark);
+}
+.btn.btn-primary:hover:disabled {
+  background-color: var(--relish);
+  color: var(--mayo);
+}
+
+.btn.btn-danger {
+  background-color: var(--ketchup);
+  color: var(--mayo);
+}
+.btn.btn-danger:hover {
+    background-color: var(--mustard);
+    color: var(--mayo);
+}
+.btn.btn-danger:hover:disabled {
+  background-color: var(--ketchup);
+  color: var(--mayo);
+}
+
+a {
+  color: var(--ketchup);
+}
+a:hover {
+  color: var(--relish);
+}
+
+.background-mayo {
+  background-color: var(--mayo);
+  color: var(--dark);
+}
+.background-mayo.hoverable:hover {
+  background-color: var(--aioli);
+}
+.background-relish {
+  background-color: var(--relish);
+  color: var(--mayo);
+}
+.background-relish.hoverable:hover {
+  background-color: var(--mustard);
+  color: var(--dark);
+}
+.background-ketchup {
+  background-color: var(--ketchup);
+  color: var(--mayo);
+}
+.background-ketchup.hoverable:hover {
+  background-color: var(--mustard);
+  color: var(--dark);
+}
+
+.created {
+  animation: enter 0.5s;
+}
+
+.selected {
+  z-index: 1;
+  animation-name: salute;
+  animation-duration: .2s;
+}
+
+.under-construction {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes enter {
+  0% {
+    transform: translateY(-500px) scale(5);
+    animation-timing-function: cubic-bezier(1,0,.9,1);
+  }
+  68% {
+    transform: translateY(0px) scale(1);
+    animation-timing-function: linear;
+  }
+  76% {
+    transform: translateY(-25px) scale(1.2);
+    animation-timing-function: linear;
+  }
+  84% {
+    transform: translateY(0px) scale(1);
+    animation-timing-function: linear;
+  }
+  92% {
+    transform: translateY(-15px) scale(1.1);
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    animation-timing-function: linear;
+  }
+}
+
+@keyframes salute {
+  0% {
+    transform: scaleX(1) scaleY(1);
+    animation-timing-function: cubic-bezier(0,0.5,0,0.8);
+  }
+  50% {
+    transform: scaleX(1.16) scaleY(0.85);
+    animation-timing-function: cubic-bezier(0.5,0,0.8,0);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 5%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 5%;
+  }
+}

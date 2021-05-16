@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import './App.css';
+import './burgers.css';
 import './layout.css';
 
 import Error from "components/Error";
