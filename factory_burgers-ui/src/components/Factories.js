@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { StyleSheet, css } from "aphrodite";
 
-import { factoryShape } from "data/testing/shapes";
+import { factoryShape } from "lib/shapes";
 
 import FactoryForm from "./FactoryForm";
 import FactoryMalfunction from "./FactoryMalfunction";

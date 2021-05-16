@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
 
-import { traitsShape } from "data/testing/shapes";
+import { traitsShape } from "lib/shapes";
 
 function Traits(props) {
   const { traits } = props;

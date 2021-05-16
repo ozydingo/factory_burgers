@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import Form from "react-bootstrap/Form";
 
-import { factoryShape } from "data/testing/shapes";
+import { factoryShape } from "lib/shapes";
 
 function displayName(blueprint, owner) {
   if (owner) {

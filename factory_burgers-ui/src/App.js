@@ -5,6 +5,7 @@ import './layout.css';
 
 import Error from "components/Error";
 import Fetching from "components/Fetching";
+import Factories from "components/Factories";
 
 import * as api from "lib/api";
 import { useRemoteData } from "lib/hooks";
@@ -23,7 +24,11 @@ function App() {
         {factories.fetching && <Fetching />}
         {factories.error && <Error />}
         {factories.response && (
-          <p>Hello, world.</p>
+          <Factories
+            csrfToken=""
+            submitPath="./data"
+            factories={factories.response}
+          />
         )}
       </main>
     </div>

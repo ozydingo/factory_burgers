@@ -11,7 +11,7 @@ import FactorySelection from "./partials/FactorySelection";
 import FormFieldsForOwner from "./partials/FormFieldsForOwner";
 import Traits from "./partials/Traits";
 
-import { factoryShape } from "data/testing/shapes";
+import { factoryShape } from "lib/shapes";
 import { indexBy, usePrevious } from "./framework";
 
 function FactoryForm(props) {

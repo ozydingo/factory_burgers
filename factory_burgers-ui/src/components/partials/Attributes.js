@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 
 import AttributeRow from "./AttributeRow";
 
-import { attributesShape } from "data/testing/shapes";
+import { attributesShape } from "lib/shapes";
 
 function attrDiff(a, b) {
   const bNames = new Set(b.map(item => item.name));
