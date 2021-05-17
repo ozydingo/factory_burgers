@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    author
+    association :author, factory: "user"
     title { "Here's the thing" }
     body { "Lorem ipsum, dolor sit amet." }
 

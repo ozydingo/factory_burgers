@@ -8,6 +8,10 @@ module FactoryBurgers
       run Middleware::Data.new
     end
 
+    map "/build" do
+      run Middleware::Build.new
+    end
+
     run Middleware::Static.new
   end
 end

@@ -27,7 +27,7 @@ function App() {
         {factories.response && (
           <Factories
             csrfToken=""
-            submitPath="./data"
+            submitPath="./build"
             factories={factories.response}
           />
         )}
