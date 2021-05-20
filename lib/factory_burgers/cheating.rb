@@ -13,7 +13,7 @@ module FactoryBurgers
     end
 
     def advance_sequence(name, klass, column, sql: nil, regex: nil)
-      sequence = FactoryBot.sequences.find(name)
+      sequence = FactoryBot::Internal.sequences.find(name)
       sql ||= sql_condition(sequence, column)
       regex ||= regex_pattern(sequence)
 

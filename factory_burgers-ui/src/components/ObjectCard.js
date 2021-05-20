@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import { StyleSheet, css } from "aphrodite";
 
+import ExternalLinkIcon from "./icons/ExternalLinkIcon";
+
 import { classes } from "./framework";
 
 function animationClass({ isNew, isActive }) {
@@ -23,6 +25,11 @@ function ObjectCard(props) {
     <div className={classes(css(styles.object, props.active && styles.active), className, "background-mayo hoverable")} onClick={props.activate}>
       <div className={css(styles.objectTitle)}>
         {object.type}
+        {object.link && (
+          <a href={object.link.url} target="_blank" rel="noopener noreferrer" className="ml-1">
+            <ExternalLinkIcon />
+          </a>
+        )}
       </div>
       <div className={css(styles.objectDetails)}>
         {["id", "name"].map(key => {
@@ -32,9 +39,6 @@ function ObjectCard(props) {
             </div>
           );
         })}
-        {object.link && (
-          <a href={object.link.url} target="_blank" rel="noopener noreferrer">View in Ops</a>
-        )}
       </div>
     </div>
   );
