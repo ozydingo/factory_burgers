@@ -1,3 +1,4 @@
+require "logger"
 require "json"
 
 module FactoryBurgers
@@ -14,12 +15,12 @@ module FactoryBurgers
         object_data = FactoryBurgers::DataAdapter.built_object_data(resource)
         response_data = {ok: true, data: object_data}
         return [200, {"Content-Type" => "application/json"}, [JSON.dump(response_data)]]
-      # rescue ActiveRecord::RecordInvalid => err
-      #   log_error(err)
-      #   render status: :unprocessable_entity, json: {ok: false, error: err.message}
-      # rescue StandardError => err
-      #   log_error(err)
-      #   render status: :internal_server_error, json: {ok: false, error: err.message}
+      rescue ActiveRecord::RecordInvalid => err
+        log_error(err)
+        return [422, {"Content-Type" => "application/json"}, [JSON.dump({ok: false, error: err.message})]]
+      rescue StandardError => err
+        log_error(err)
+        return [500, {"Content-Type" => "application/json"}, [JSON.dump({ok: false, error: err.message})]]
       end
 
       def request(env)
@@ -47,6 +48,14 @@ module FactoryBurgers
         raise "Danger, will Robinson! #{params[:owner_association]} is an impostor!" if !klass.reflections.include?(params[:owner_association])
 
         return params[:owner_type].constantize.find(params[:owner_id])
+      end
+
+      def log_error(error)
+        logger.error("#{error.class}: #{error.message}\n" + error.backtrace&.join("\n").to_s)
+      end
+
+      def logger
+        @logger ||= Logger.new($stdout)
       end
     end
   end
