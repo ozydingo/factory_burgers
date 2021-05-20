@@ -2,8 +2,8 @@ PATH
   remote: ../..
   specs:
     factory_burgers (0.0.0)
-      factory_bot
-      rack
+      factory_bot (>= 4)
+      rack (>= 1)
 
 GEM
   remote: https://rubygems.org/
