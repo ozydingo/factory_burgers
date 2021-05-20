@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_205446) do
+ActiveRecord::Schema.define(version: 2021_05_20_013026) do
 
   create_table "comments", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2021_05_15_205446) do
     t.string "lastname"
     t.string "login"
     t.string "email"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["login"], name: "index_users_on_login", unique: true
   end
 
 end
