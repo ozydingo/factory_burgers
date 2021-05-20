@@ -1,6 +1,4 @@
-require "rails_helper"
-
-describe Factories::SequenceInjector do
+describe FactoryBurgers::SequenceInjector do
   let(:injector) { described_class.new("foo") }
 
   it "injects a string value" do

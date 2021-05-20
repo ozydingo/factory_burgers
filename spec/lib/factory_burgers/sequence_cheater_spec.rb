@@ -1,6 +1,4 @@
-require "rails_helper"
-
-describe Factories::SequenceCheater do
+describe FactoryBurgers::SequenceCheater do
   let(:cheater) { described_class.new }
 
   it "collects occurences of `generate`" do

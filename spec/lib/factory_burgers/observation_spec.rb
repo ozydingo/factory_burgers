@@ -1,62 +1,60 @@
-require "rails_helper"
-
-describe Factories::Observation do
+describe FactoryBurgers::Observation do
   before :all do
-    Factories::Observation.purge!
+    FactoryBurgers::Observation.purge!
   end
 
   after :each do
-    Factories::Observation.purge!
+    FactoryBurgers::Observation.purge!
   end
 
   it "returns a url and default name for an object" do
-    Factories::Observation.register_link("Account") do |obj|
-      {url: "url/for/account/#{obj.id}"}
+    FactoryBurgers::Observation.register_link("User") do |obj|
+      {url: "url/for/user/#{obj.id}"}
     end
-    account = create :account
-    link = Factories::Observation.app_link(account)
+    user = create :user
+    link = FactoryBurgers::Observation.app_link(user)
 
-    expect(link[:label]).to eq(Factories::Observation.default_label(account))
-    expect(link[:url]).to eq("url/for/account/#{account.id}")
+    expect(link[:label]).to eq(FactoryBurgers::Observation.default_label(user))
+    expect(link[:url]).to eq("url/for/user/#{user.id}")
   end
 
   it "includes class, id, and name if available in the default name" do
-    account = create :account
-    label = Factories::Observation.default_label(account)
+    user = create :user
+    label = FactoryBurgers::Observation.default_label(user)
 
-    expect(label).to include("Account")
-    expect(label).to include(account.id.to_s)
-    expect(label).to include(account.name)
+    expect(label).to include("User")
+    expect(label).to include(user.id.to_s)
+    expect(label).to include(user.name)
   end
 
   it "handles link data not found" do
-    account = create :account
-    link = Factories::Observation.app_link(account)
+    user = create :user
+    link = FactoryBurgers::Observation.app_link(user)
     expect(link).to be_nil
   end
 
   it "uses a specified label" do
-    Factories::Observation.register_link("Account") do |obj|
+    FactoryBurgers::Observation.register_link("User") do |obj|
       {
-        url: "url/for/account/#{obj.id}",
-        label: "the account named #{obj.name}",
+        url: "url/for/user/#{obj.id}",
+        label: "the user named #{obj.name}",
       }
     end
-    account = create :account
-    link = Factories::Observation.app_link(account)
+    user = create :user
+    link = FactoryBurgers::Observation.app_link(user)
 
-    expect(link[:label]).to eq("the account named #{account.name}")
+    expect(link[:label]).to eq("the user named #{user.name}")
   end
 
   it "allows extra arguments for links" do
-    Factories::Observation.register_link("Account") do |obj, suffix|
+    FactoryBurgers::Observation.register_link("User") do |obj, suffix|
       {
-        url: "url/for/account/#{obj.id}/#{suffix}",
+        url: "url/for/user/#{obj.id}/#{suffix}",
       }
     end
-    account = create :account
-    link = Factories::Observation.app_link(account, "xyz")
+    user = create :user
+    link = FactoryBurgers::Observation.app_link(user, "xyz")
 
-    expect(link[:url]).to eq("url/for/account/#{account.id}/xyz")
+    expect(link[:url]).to eq("url/for/user/#{user.id}/xyz")
   end
 end
