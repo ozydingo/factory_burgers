@@ -2,4 +2,4 @@
 /log
 
 .byebug_history
-db/development.sqlite3
+db/*.sqlite3

@@ -12,7 +12,7 @@ module FactoryBurgers
         attributes = attribute_overrides(params)
         owner = get_resource_owner(params)
         resource = FactoryBurgers::Builder.new.build(factory, traits, attributes, owner)
-        object_data = FactoryBurgers::DataAdapter.built_object_data(resource)
+        object_data = FactoryBurgers::Models::FactoryOutput.new(resource).data
         response_data = {ok: true, data: object_data}
         return [200, {"Content-Type" => "application/json"}, [JSON.dump(response_data)]]
       rescue ActiveRecord::RecordInvalid => err

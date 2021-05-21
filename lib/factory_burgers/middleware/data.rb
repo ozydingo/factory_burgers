@@ -10,7 +10,7 @@ module FactoryBurgers
       end
 
       def factory_data(factory)
-        FactoryBurgers::DataAdapter.factory_data(factory)
+        FactoryBurgers::Models::Factory.new(factory).to_h
       end
     end
   end
