@@ -29,7 +29,7 @@ module FactoryBurgers
       end
 
       def class_name
-        factory.build_class.base_class.name
+        build_class.base_class.name
       end
 
       def traits
@@ -42,9 +42,13 @@ module FactoryBurgers
 
       private
 
+      def build_class
+        factory.build_class
+      end
+
       # TODO: excluding id is a front-end concern, move it there.
       def data_columns
-        factory.build_class.columns.reject { |col| col.name == "id" }
+        factory.build_class.columns.reject { |col| col.name == build_class.primary_key }
       end
 
       def defined_traits
