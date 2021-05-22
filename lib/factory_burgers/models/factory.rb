@@ -37,7 +37,7 @@ module FactoryBurgers
       end
 
       def attributes
-        data_columns.map { |col| Attribute.new(col) }
+        settable_columns.map { |col| Attribute.new(col) }
       end
 
       private
@@ -46,8 +46,7 @@ module FactoryBurgers
         factory.build_class
       end
 
-      # TODO: excluding id is a front-end concern, move it there.
-      def data_columns
+      def settable_columns
         factory.build_class.columns.reject { |col| col.name == build_class.primary_key }
       end
 
