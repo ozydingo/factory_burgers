@@ -1,3 +1,8 @@
+# Module for adding, finding, and using application data presenters. Presenters
+# are used to define what attributes to show in the front end, what to call the
+# built objects, and managing links to the objects in the application if they
+# exist.
+
 module FactoryBurgers
   module Presenters
     @presenters = {}
@@ -33,7 +38,7 @@ module FactoryBurgers
       presenter = presenter_for(object) or return nil
       {
         type: presenter.type,
-        attribuets: presenter.attributes,
+        attributes: presenter.attributes,
         link: presenter.link_path,
       }
     end

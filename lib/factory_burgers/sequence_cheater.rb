@@ -1,3 +1,22 @@
+# A SequenceCheater is able to take the block associated with a factory's
+# attribute and discover if it uses a sequence (specifically, if it calls
+# `generate`). It does this by evaluting the block in its own context, where
+# the `generate` method has been defined to save the name it was called with.
+#
+# For example, in the following factory:
+#
+# FactoryBot.define do
+#   factory :foo do
+#     bar { generate :baz }
+#   end
+# end
+#
+# We can discover the `bar` attribute of the factory, and throgh some slightly
+# dangerous non-public access (it's Ruby, after all) we can get the block
+# defined as `{ generate :baz }`. We then call that block on a SequenceCheater,
+# which simply records that `generate` was called with the name `:baz`.
+
+
 module FactoryBurgers
   class SequenceCheater < BasicObject
     attr_reader :sequence_names

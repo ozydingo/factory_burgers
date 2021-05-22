@@ -1,3 +1,6 @@
+# Discover information about factories for a class, such as what associations
+# are defined on that class that also have factories we can use
+
 module FactoryBurgers
   module Introspection
     module_function

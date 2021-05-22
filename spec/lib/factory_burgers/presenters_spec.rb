@@ -13,9 +13,10 @@ describe FactoryBurgers::Presenters do
     let(:user) { create :user, name: "Foo", login: "foobar" }
     let(:data) { FactoryBurgers::Presenters.data_for(user) }
 
-    it "uses the class" do
+    it "uses the default class" do
       expect(data[:type]).to eq("User")
-      expect(data[:link]).to include({url: nil})
+      expect(Set.new(data[:attributes].keys)).to eq(Set.new(["id", "name"]))
+      expect(data[:link]).to be_nil
     end
   end
 
@@ -30,7 +31,7 @@ describe FactoryBurgers::Presenters do
 
       it "uses the presenter class" do
         expect(user_data[:type]).to eq("An example")
-        expect(user_data[:link]).to include(url: "link/to/foobar")
+        expect(user_data[:link]).to eq("link/to/foobar")
       end
     end
 
@@ -40,7 +41,7 @@ describe FactoryBurgers::Presenters do
 
       it "uses the presenter class" do
         expect(admin_data[:type]).to eq("An example")
-        expect(admin_data[:link]).to include(url: "link/to/foobar!")
+        expect(admin_data[:link]).to eq("link/to/foobar!")
       end
     end
 
@@ -50,7 +51,7 @@ describe FactoryBurgers::Presenters do
 
       it "uses the default base presenter" do
         expect(post_data[:type]).to eq("Post")
-        expect(post_data[:link]).to include(url: nil)
+        expect(post_data[:link]).to be_nil
       end
     end
 
@@ -67,7 +68,7 @@ describe FactoryBurgers::Presenters do
       end
 
       expect(data[:type]).to eq("A user named Foo")
-      expect(data[:link]).to include(url: "path/to/user/#{user.id}/profile")
+      expect(data[:link]).to eq("path/to/user/#{user.id}/profile")
     end
 
     it "uses default values" do
@@ -76,7 +77,7 @@ describe FactoryBurgers::Presenters do
       end
 
       expect(data[:type]).to eq("User")
-      expect(data[:link]).to include({url: nil})
+      expect(data[:link]).to be_nil
     end
   end
 end

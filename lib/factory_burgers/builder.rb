@@ -1,3 +1,5 @@
+# Build resources from specified factories, traits, and attributes
+
 module FactoryBurgers
   class Builder
     # TODO: clean up method signature
