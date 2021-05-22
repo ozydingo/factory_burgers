@@ -34,7 +34,7 @@ module FactoryBurgers
       {
         type: presenter.type,
         attribuets: presenter.attributes,
-        link: presenter.app_link,
+        link: presenter.link_path,
       }
     end
 

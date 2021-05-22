@@ -26,7 +26,7 @@ function ObjectCard(props) {
       <div className={css(styles.objectTitle)}>
         {object.type}
         {object.link && (
-          <a href={object.link.url} target="_blank" rel="noopener noreferrer" className="ml-1">
+          <a href={object.link} target="_blank" rel="noopener noreferrer" className="ml-1">
             <ExternalLinkIcon />
           </a>
         )}
@@ -49,6 +49,7 @@ ObjectCard.propTypes = {
   object: PropTypes.shape({
     attributes: PropTypes.object.isRequired,
     type: PropTypes.string.isRequired,
+    link: PropTypes.string,
   }).isRequired,
 };
 

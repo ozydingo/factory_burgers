@@ -7,7 +7,9 @@ describe FactoryBurgers::Models::FactoryOutput do
 
   it "builds data" do
     expect(output_data[:type]).to eq("User")
-    expect(output_data[:attributes]).to eq(user.attributes)
+    expect(output_data[:attributes]).to eq({"id" => user.id, "name" => user.name})
+    expect(output_data).to include(:link)
+    expect(output_data[:link]).to be_nil
   end
 
   describe "association_factories" do
@@ -22,20 +24,6 @@ describe FactoryBurgers::Models::FactoryOutput do
         association_name: "group",
         factory_name: "group",
       })
-    end
-  end
-
-  describe "link" do
-    before do
-      allow(FactoryBurgers::Observation).to receive(:app_link).with(user).and_return(
-        {url: "path/to/user"}
-      )
-    end
-
-    let(:link) { output_data[:link] }
-
-    it "returns the link" do
-      expect(link).to include({url: "path/to/user"})
     end
   end
 end

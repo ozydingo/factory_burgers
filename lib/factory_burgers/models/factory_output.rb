@@ -16,7 +16,7 @@ module FactoryBurgers
         return {
           type: presenter.type,
           attributes: presenter.attributes,
-          link: presenter.app_link,
+          link: presenter.link_path,
           association_factories: sorted_assocs.map { |item| association_factory_data(item) },
         }
       end

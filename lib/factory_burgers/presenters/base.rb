@@ -21,21 +21,8 @@ module FactoryBurgers
         object.attributes.slice("id", "name")
       end
 
-      def app_link
-        {
-          url: link_path,
-          label: link_label
-        }
-      end
-
       def link_path
-        link = FactoryBurgers::Observation.app_link(object)
-        link && link[:url]
-      end
-
-      def link_label
-        link = FactoryBurgers::Observation.app_link(object)
-        link && link[:label]
+        nil
       end
     end
   end
