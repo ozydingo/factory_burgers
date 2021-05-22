@@ -1,21 +1,23 @@
 module FactoryBurgers
   module Models
     class FactoryOutput
-      attr_reader :object
+      attr_reader :object, :presenter
 
       # `object` is whatever the output of `Factory#create` was
       def initialize(object)
         @object = object
+        @presenter = FactoryBurgers::Presenters::Base.new(object)
       end
 
       def data
         # TODO: Sorting by name is a UI concern; move it there.
         sorted_assocs = association_factories.sort_by { |item| item[:association].name }
+        # TODO: group type, attributes, and link into `object`, move keys into presenter
         return {
-          type: object.class.name,
-          attributes: object.attributes,
+          type: presenter.type,
+          attributes: presenter.attributes,
+          link: presenter.app_link,
           association_factories: sorted_assocs.map { |item| association_factory_data(item) },
-          link: FactoryBurgers::Observation.app_link(object),
         }
       end
 
