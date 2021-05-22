@@ -18,7 +18,7 @@ module FactoryBurgers
       end
 
       def attributes
-        @object.attributes
+        object.attributes.slice("id", "name")
       end
 
       def app_link

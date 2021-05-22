@@ -32,13 +32,11 @@ function ObjectCard(props) {
         )}
       </div>
       <div className={css(styles.objectDetails)}>
-        {["id", "name"].map(key => {
-          return attributes.hasOwnProperty(key) && (
-            <div key={key}>
-              {`${key}: ${attributes[key]}`}
-            </div>
-          );
-        })}
+        {Object.entries(attributes).map(([name, value]) => (
+          <div key={name}>
+            {`${name}: ${value}`}
+          </div>
+        ))}
       </div>
     </div>
   );

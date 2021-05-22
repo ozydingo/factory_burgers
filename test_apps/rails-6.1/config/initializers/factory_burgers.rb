@@ -1,6 +1,15 @@
 class FactoryBurgers::Presenters::UserPresenter < FactoryBurgers::Presenters::Base
   presents :user
 
+  def attributes
+    {
+      id: user.id,
+      name: user.full_name,
+      login: user.login,
+      email: user.email,
+    }
+  end
+
   def link_path
     Rails.application.routes.url_helpers.user_path(user)
   end
@@ -11,6 +20,14 @@ FactoryBurgers::Presenters.present "User", with: FactoryBurgers::Presenters::Use
 
 # And one as a block!
 FactoryBurgers::Presenters.present("Post") do
+  attributes do |post|
+    {
+      id: post.id,
+      author_id: post.author_id,
+      word_ccount: post.body.split(/\s+/).count,
+    }
+  end
+
   link_path { |post| Rails.application.routes.url_helpers.post_path(post) }
 end
 
