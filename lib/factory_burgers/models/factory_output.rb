@@ -6,7 +6,7 @@ module FactoryBurgers
       # `object` is whatever the output of `Factory#create` was
       def initialize(object)
         @object = object
-        @presenter = FactoryBurgers::Presenters::Base.new(object)
+        @presenter = FactoryBurgers::Presenters.presenter_for(object)
       end
 
       def data

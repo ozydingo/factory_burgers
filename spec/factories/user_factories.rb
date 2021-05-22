@@ -25,4 +25,6 @@ FactoryBot.define do
       name { generate(:user_name) + "!" }
     end
   end
+
+  factory :admin, parent: :user, class: "Admin"
 end

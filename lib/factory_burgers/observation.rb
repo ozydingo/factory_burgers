@@ -1,5 +1,4 @@
 module FactoryBurgers
-  # TODO: replace behaviors with presenters
   module Observation
     @links = {}
 
@@ -11,6 +10,7 @@ module FactoryBurgers
 
     def purge!
       @links = {}
+      @presenters = {}
     end
 
     def app_link(object, *args)

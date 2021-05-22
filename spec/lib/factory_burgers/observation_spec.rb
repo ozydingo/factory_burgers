@@ -7,6 +7,37 @@ describe FactoryBurgers::Observation do
     FactoryBurgers::Observation.purge!
   end
 
+  before do
+    FactoryBurgers::Observation.present("User") do |user|
+      type "A user named #{user.name}"
+      url "url/for/user/#{user.id}/profile"
+    end
+
+    FactoryBurgers::Observation.present("User") do |user|
+      def type
+        "A user named #{user.name}"
+      end
+
+      def url
+        "url/for/user/#{user.id}/profile"
+      end
+    end
+
+    FactoryBurgers::Observation.present("User") do |user|
+      type { |user| "A user named #{user.name}" }
+      url { |user| "url/for/user/#{user.id}/profile" }
+    end
+
+
+    FactoryBurgers::Observation.present("User") do |user|
+      {
+        type: "A user",
+        url: "url/for/user/#{user.id}/profile",
+      }
+    end
+  end
+
+
   it "returns a url and default name for an object" do
     FactoryBurgers::Observation.register_link("User") do |obj|
       {url: "url/for/user/#{obj.id}"}
