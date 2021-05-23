@@ -12,10 +12,13 @@ eslint:
 
 test: rubocop eslint rspec
 
+assets:
+	cd factory_burgers-ui; npm run build
+
 clean:
 	-rm release.gem
 
-release.gem: test clean
+release.gem: assets test clean
 	gem build factory_burgers.gemspec --output release.gem
 
 gem: release.gem
