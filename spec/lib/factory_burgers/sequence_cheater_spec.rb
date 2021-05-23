@@ -10,6 +10,6 @@ describe FactoryBurgers::SequenceCheater do
       generate :qux
     end
 
-    expect(Set.new(cheater.sequence_names)).to eq(Set.new([:baz, :qux]))
+    expect(Set.new(cheater.sequence_names)).to eq(Set.new(%i[baz qux]))
   end
 end

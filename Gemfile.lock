@@ -59,6 +59,9 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.5.0)
       parser (>= 3.0.1.1)
+    rubocop-rspec (2.3.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
     sqlite3 (1.4.2)
     tzinfo (2.0.4)
@@ -75,6 +78,7 @@ DEPENDENCIES
   factory_burgers!
   rspec
   rubocop
+  rubocop-rspec
   sqlite3
 
 BUNDLED WITH

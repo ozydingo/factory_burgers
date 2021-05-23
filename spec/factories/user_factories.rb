@@ -18,11 +18,11 @@ FactoryBot.define do
     name { generate :user_name }
 
     trait :silly do
-      name { generate(:user_name) + "?" }
+      name { "#{generate(:user_name)}?" }
     end
 
     trait :serious do
-      name { generate(:user_name) + "!" }
+      name { "#{generate(:user_name)}!" }
     end
   end
 

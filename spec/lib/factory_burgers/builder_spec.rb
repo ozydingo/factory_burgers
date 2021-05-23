@@ -24,21 +24,21 @@ describe FactoryBurgers::Builder do
       context "when the owner is a belongs_to association" do
         it "sets the resource's owner" do
           group = Group.create!
-          user = builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, group)
+          builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, group)
         end
       end
 
       context "when the owner is a has_one association" do
         it "sets the resource's owner" do
           profile = UserProfile.create!
-          user = builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, profile)
+          builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, profile)
         end
       end
 
       context "when the owner is a has_many association" do
         it "sets the resource's owner" do
           post = create :post
-          user = builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, post)
+          builder.build(:user, [], {name: "Sir Regynald J Bubblesworth"}, post)
         end
       end
     end

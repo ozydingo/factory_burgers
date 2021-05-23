@@ -16,14 +16,18 @@ describe FactoryBurgers::Models::FactoryOutput do
     let(:association_factories) { output_data[:association_factories] }
 
     it "includes all buildable associations" do
-      expect(association_factories).to include({
-        association_name: "posts",
-        factory_name: "post",
-      })
-      expect(association_factories).to include({
-        association_name: "group",
-        factory_name: "group",
-      })
+      expect(association_factories).to include(
+        {
+          association_name: "posts",
+          factory_name: "post",
+        }
+      )
+      expect(association_factories).to include(
+        {
+          association_name: "group",
+          factory_name: "group",
+        }
+      )
     end
   end
 end

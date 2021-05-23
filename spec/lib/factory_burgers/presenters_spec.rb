@@ -1,7 +1,7 @@
 describe FactoryBurgers::Presenters do
   # NOTE: if ever we develop a default set of presenters,
   # we will need to be more careful than just to `purge!`
-  before :all do
+  before :all do # rubocop:disable RSpec/BeforeAfterAll; this is not a db action
     FactoryBurgers::Presenters.purge!
   end
 
@@ -15,13 +15,13 @@ describe FactoryBurgers::Presenters do
 
     it "uses the default class" do
       expect(data[:type]).to eq("User")
-      expect(Set.new(data[:attributes].keys)).to eq(Set.new(["id", "name"]))
+      expect(Set.new(data[:attributes].keys)).to eq(Set.new(%w[id name]))
       expect(data[:link]).to be_nil
     end
   end
 
   describe "present with class" do
-    before do
+    before :each do
       FactoryBurgers::Presenters.present("User", with: FactoryBurgers::Presenters::ExamplePresenter)
     end
 
@@ -54,7 +54,6 @@ describe FactoryBurgers::Presenters do
         expect(post_data[:link]).to be_nil
       end
     end
-
   end
 
   describe "present with block" do
@@ -72,8 +71,8 @@ describe FactoryBurgers::Presenters do
     end
 
     it "uses default values" do
-      FactoryBurgers::Presenters.present("User") do |user|
-        attributes { |user| {} }
+      FactoryBurgers::Presenters.present("User") do
+        attributes { |user| {id: user.id} }
       end
 
       expect(data[:type]).to eq("User")

@@ -1,0 +1,25 @@
+inherit_from:
+  - ../.rubocop.yml
+
+require:
+  - rubocop-rspec
+
+# Specs can have longer blocks.
+Metrics/BlockLength:
+  Max: 150
+
+# Meh
+RSpec/DescribedClass:
+  Enabled: false
+
+# Some examples have DSL blocks in them. Deal.
+RSpec/ExampleLength:
+  Max: 20
+
+# Explicit is better than implicit.
+RSpec/HookArgument:
+  EnforcedStyle: each
+
+# This is just better, sometimes.
+RSpec/MultipleExpectations:
+  Max: 5

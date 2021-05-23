@@ -9,7 +9,7 @@ describe FactoryBurgers::Cheating do
     it "detects multiple sequences attribute defined" do
       factory = FactoryBot.factories.find(:factory_with_multiple_sequences)
       sequences = FactoryBurgers::Cheating.discover_sequences(factory)
-      expect(Set.new(sequences)).to eq(Set.new([:bar_name, :baz_name, :qux_name]))
+      expect(Set.new(sequences)).to eq(Set.new(%i[bar_name baz_name qux_name]))
     end
 
     it "detects no sequence attributes defined" do
@@ -23,7 +23,7 @@ describe FactoryBurgers::Cheating do
     it "advances a sequence to avoid uniqueness validation" do
       klass = double
       allow(klass).to receive(:where).and_return(klass)
-      allow(klass).to receive(:pluck).with(:foo).and_return(["foo1", "foo5"])
+      allow(klass).to receive(:pluck).with(:foo).and_return(%w[foo1 foo5])
 
       FactoryBurgers::Cheating.advance_sequence(:sequence, klass, :foo)
       next_foo = FactoryBot.generate(:sequence)
@@ -33,7 +33,7 @@ describe FactoryBurgers::Cheating do
     it "handles numeric behavior" do
       klass = double
       allow(klass).to receive(:where).and_return(klass)
-      allow(klass).to receive(:pluck).with(:bar).and_return(["bar-9", "bar-5", "bar20"])
+      allow(klass).to receive(:pluck).with(:bar).and_return(%w[bar-9 bar-5 bar20])
 
       FactoryBurgers::Cheating.advance_sequence(:sequence_with_numeric_behavior, klass, :bar)
       next_bar = generate(:sequence_with_numeric_behavior)
