@@ -1,6 +1,6 @@
 VERSION := $(shell ruby -r ./lib/factory_burgers/version.rb -e 'print FactoryBurgers::VERSION')
 
-.PHONY: rspec rubocop eslint test gem clean publish
+.PHONY: rspec rubocop eslint assets test gem clean publish
 
 rspec:
 	rspec
