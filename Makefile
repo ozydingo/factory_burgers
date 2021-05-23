@@ -20,10 +20,10 @@ assets:
 clean:
 	-rm factory_burgers-$(VERSION).gem
 
-factory_burgers-$(VERSION).gem: assets test
+factory_burgers-$(VERSION).gem:
 	gem build factory_burgers.gemspec
 
 gem: factory_burgers-$(VERSION).gem
 
-publish: factory_burgers-$(VERSION).gem
+publish: assets test factory_burgers-$(VERSION).gem
 	gem push factory_burgers-$(VERSION).gem
