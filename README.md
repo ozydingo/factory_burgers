@@ -146,7 +146,13 @@ In a future iteration, `FactoryBot` may try to automatically detect these for an
 
 ## Development
 
-Run the tests with `rspec`.
+### Testing
+
+```
+make test
+```
+
+This runs `rspec`, `eslint`, and `rubocop`.
 
 ### UI
 
