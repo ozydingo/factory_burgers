@@ -6,8 +6,7 @@ rspec:
 	rspec
 
 rubocop:
-	rubocop lib
-	rubocop spec
+	rubocop --display-style-guide --parallel lib spec
 
 eslint:
 	cd factory_burgers-ui; npm run lint

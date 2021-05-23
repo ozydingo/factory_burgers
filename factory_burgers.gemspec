@@ -5,7 +5,8 @@ Gem::Specification.new do |s|
   s.name        = 'factory_burgers'
   s.version     = FactoryBurgers::VERSION
   s.date        = Date.today.to_s
-  s.summary     = "UI for thoughtbot/factory_bot"
+  s.summary     = "Bring the power of thoughtbot/factory_bot to manual testing"
+  s.description = "factory_burgers provides a UI and some tooling to allow manual testing the abilit to use all of your factories."
   s.authors     = ["Andrew Schwartz"]
   s.email       = 'ozydingo@gmail.com'
   s.files       = Dir["lib/**/*"]

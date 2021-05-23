@@ -1,4 +1,7 @@
+require: rubocop-rspec
+
 AllCops:
+  NewCops: enable
   Include:
     - lib/**/*.rb
     - spec/**/*.rb
