@@ -1,6 +1,5 @@
-# Build resources from specified factories, traits, and attributes
-
 module FactoryBurgers
+  # Build resources from specified factories, traits, and attributes
   class Builder
     # TODO: clean up method signature
     def build(factory, traits, attributes, owner)

@@ -25,7 +25,8 @@ describe FactoryBurgers::Cheating do
       allow(klass).to receive(:where).and_return(klass)
       allow(klass).to receive(:pluck).with(:foo).and_return(["foo1", "foo5"])
 
-      next_foo = FactoryBurgers::Cheating.advance_sequence(:sequence, klass, :foo)
+      FactoryBurgers::Cheating.advance_sequence(:sequence, klass, :foo)
+      next_foo = FactoryBot.generate(:sequence)
       expect(next_foo).to eq("foo6")
     end
 
@@ -34,7 +35,8 @@ describe FactoryBurgers::Cheating do
       allow(klass).to receive(:where).and_return(klass)
       allow(klass).to receive(:pluck).with(:bar).and_return(["bar-9", "bar-5", "bar20"])
 
-      next_bar = FactoryBurgers::Cheating.advance_sequence(:sequence_with_numeric_behavior, klass, :bar)
+      FactoryBurgers::Cheating.advance_sequence(:sequence_with_numeric_behavior, klass, :bar)
+      next_bar = generate(:sequence_with_numeric_behavior)
       # Since, in general, we don't know how the sequence position is transformed into
       # the sequence value, the best we can robustly do for now is verify that something
       # is generated and it doesn't blow up.

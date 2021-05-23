@@ -2,8 +2,9 @@ require "json"
 
 module FactoryBurgers
   module Middleware
+    # Respond with factory data to display in the main form
     class Data
-      def call(env)
+      def call(*)
         factories = FactoryBot.factories.sort_by(&:name)
         factory_data = factories.map { |factory| factory_data(factory) }
         return [200, {"Content-Type" => "application/json"}, [JSON.dump(factory_data)]]

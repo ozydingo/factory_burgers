@@ -3,15 +3,11 @@ require "json"
 
 module FactoryBurgers
   module Middleware
+    # Build a requested resource and return data for follow-up actions
     # TODO: extract controller methods into controller-like classes
     class Build
       def call(env)
-        params = paramters(env)
-        factory = params.fetch("factory")
-        traits = params["traits"]&.keys
-        attributes = attribute_overrides(params)
-        owner = get_resource_owner(params)
-        resource = FactoryBurgers::Builder.new.build(factory, traits, attributes, owner)
+        resource = build(env)
         object_data = FactoryBurgers::Models::FactoryOutput.new(resource).data
         response_data = {ok: true, data: object_data}
         return [200, {"Content-Type" => "application/json"}, [JSON.dump(response_data)]]
@@ -23,6 +19,15 @@ module FactoryBurgers
         return [500, {"Content-Type" => "application/json"}, [JSON.dump({ok: false, error: err.message})]]
       end
 
+      def build(env)
+        params = paramters(env)
+        factory = params.fetch("factory")
+        traits = params["traits"]&.keys
+        attributes = attribute_overrides(params["attributes"])
+        owner = get_resource_owner(params[:owner_type], params[:owner_id], params[:owner_association])
+        return FactoryBurgers::Builder.new.build(factory, traits, attributes, owner)
+      end
+
       def request(env)
         Rack::Request.new(env)
       end
@@ -31,23 +36,22 @@ module FactoryBurgers
         request(env).params
       end
 
-      def attribute_overrides(params)
-        attribute_items = params["attributes"] || []
-        attribute_items = attribute_items.reject{ |attr| !attr["name"].present? }
+      def attribute_overrides(attribute_items)
+        return [] if attribute_items.nil?
+
+        attribute_items = attribute_items.select { |attr| attr["name"].present? }
         return attribute_items.map { |attr| [attr["name"], attr["value"]] }.to_h
       end
 
       # TODO: make params explicit
-      def get_resource_owner(params)
-        return nil if params[:owner_type].blank? || params[:owner_id].blank? || params[:owner_association].blank?
+      def get_resource_owner(owner_type, owner_id, owner_association)
+        return nil if owner_type.blank? || owner_id.blank? || owner_association.blank?
 
-        valid_owner_types = ActiveRecord::Base.descendants.map(&:name)
-        raise "Danger, will Robinson! #{params[:owner_type]} is an impostor!" if !valid_owner_types.include?(params[:owner_type])
+        klass = owner_type.constantize
+        invalid_build_class(klass) if !valid_build_class?(klass)
+        invalid_association(klass) if !valid_owner?(klass, owner_association)
 
-        klass = params[:owner_type].constantize
-        raise "Danger, will Robinson! #{params[:owner_association]} is an impostor!" if !klass.reflections.include?(params[:owner_association])
-
-        return params[:owner_type].constantize.find(params[:owner_id])
+        return klass.constantize.find(owner_id)
       end
 
       def log_error(error)
@@ -56,6 +60,24 @@ module FactoryBurgers
 
       def logger
         @logger ||= Logger.new($stdout)
+      end
+
+      private
+
+      def valid_build_class?(klass)
+        klass < ActiveRecord::Base
+      end
+
+      def invalid_build_class(klass)
+        raise "#{klass.name} is not a thing I can build."
+      end
+
+      def valid_association?(klass, assoc_name)
+        klass.reflections.include?(assoc_name)
+      end
+
+      def invalid_association(klass, association)
+        raise "#{association} is not an association for #{klass.name}!"
       end
     end
   end

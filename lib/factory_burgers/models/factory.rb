@@ -2,6 +2,7 @@ require "json"
 
 module FactoryBurgers
   module Models
+    # Represent a factory and associated data needed for UI
     # TODO: support transient attributes (f.definition.attributes ...?)
     # TODO: support associations
     class Factory
@@ -55,6 +56,7 @@ module FactoryBurgers
       end
     end
 
+    #:nodoc:
     class Attribute
       attr_reader :column
 
@@ -75,6 +77,7 @@ module FactoryBurgers
       end
     end
 
+    #:nodoc:
     class Trait
       attr_reader :trait
 

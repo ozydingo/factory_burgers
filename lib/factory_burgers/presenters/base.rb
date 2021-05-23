@@ -1,10 +1,9 @@
-# Presenter classes are responsible for formatting application object data for
-# the UI. This defatul presenter will display the id and name attributes, if
-# they exist, and does not have an application link. Create subclasses of this
-# class to present different information for different application models.
-
 module FactoryBurgers
   module Presenters
+    # Presenter classes are responsible for formatting application object data for
+    # the UI. This defatul presenter will display the id and name attributes, if
+    # they exist, and does not have an application link. Create subclasses of this
+    # class to present different information for different application models.
     class Base
       class << self
         def presents(name)

@@ -1,4 +1,5 @@
 module FactoryBurgers
+  # Wrap FactoryBot knowledge, eventually switch on version
   module FactoryBotAdapter
     module_function
 
@@ -20,7 +21,7 @@ module FactoryBurgers
 
     # TODO: support non-v6 versions
     def load_factories
-      FactoryBot::V6.load_factories
+      FactoryBotAdapter::FactoryBotV6.load_factories
     end
 
     def factories
@@ -33,7 +34,8 @@ module FactoryBurgers
   end
 
   module FactoryBotAdapter
-    module FactoryBot::V6
+    #:nodoc:
+    module FactoryBotV6
       module_function
 
       def load_factories

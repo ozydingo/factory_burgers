@@ -1,8 +1,7 @@
-# This module contrains utilities to manipulate sequences that might fail for
-# usage in development environments that do not roll back db transactions for
-# factory creations.
-
 module FactoryBurgers
+  # This module contrains utilities to manipulate sequences that might fail for
+  # usage in development environments that do not roll back db transactions for
+  # factory creations.
   module Cheating
     module_function
 
@@ -32,10 +31,13 @@ module FactoryBurgers
       sql ||= sql_condition(sequence, column)
       regex ||= regex_pattern(sequence)
 
-      matches = klass.where(sql).pluck(column).select { |val| val =~ regex }
-      highest = matches.map { |value| value =~ regex && Regexp.last_match(1) }.map(&:to_i).max
+      highest = find_highest_index_value(klass, column, sql, regex) or return nil
       highest&.times { FactoryBot.generate name }
-      return FactoryBot.generate(name)
+    end
+
+    def find_highest_index_value(klass, column, sql, regex)
+      matches = klass.where(sql).pluck(column).select { |val| val =~ regex }
+      return matches.map { |value| value =~ regex && Regexp.last_match(1) }.map(&:to_i).max
     end
 
     # ---

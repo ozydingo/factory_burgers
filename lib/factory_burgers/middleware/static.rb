@@ -1,5 +1,6 @@
 module FactoryBurgers
   module Middleware
+    # Serve static assets build for the UI
     class Static
       def call(env)
         return slashpath_redirect(env["REQUEST_PATH"]) if slashpath_redirect?(env)
@@ -14,7 +15,7 @@ module FactoryBurgers
       def slashpath_redirect(path)
         return [
           302,
-          {'Location' => path + "/", 'Content-Type' => 'text/html', 'Content-Length' => '0'},
+          {'Location' => "#{path}/", 'Content-Type' => 'text/html', 'Content-Length' => '0'},
           [],
         ]
       end

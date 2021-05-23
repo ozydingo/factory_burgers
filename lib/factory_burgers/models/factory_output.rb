@@ -1,5 +1,6 @@
 module FactoryBurgers
   module Models
+    # Data class for the output of a factory create action
     class FactoryOutput
       attr_reader :object, :presenter
 

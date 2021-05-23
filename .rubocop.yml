@@ -1,0 +1,41 @@
+AllCops:
+  Include:
+    - lib/**/*.rb
+    - spec/**/*.rb
+  Exclude:
+    - docs/**/*
+    - factory_burgers-ui/**/*
+    - lib/assets/**/*
+    - test_apps/**/*
+
+# wut
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+# Why would you enforce a single-letter variable name?
+Naming/RescuedExceptionsVariableName:
+  PreferredName: err
+
+# I hate this rule
+Style/NegatedIf:
+  Enabled: false
+
+# Trailing commas rule
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Trailing commas rule
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+# This is just anonying.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Explicit returns are good.
+Style/RedundantReturn:
+  Enabled: false
+
+# Changing string to add interpolation is annoying.
+Style/StringLiterals:
+  Enabled: false

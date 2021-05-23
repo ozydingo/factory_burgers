@@ -1,9 +1,8 @@
-# The PresenterBuilder is resposible for building anonymous subclasses of
-# FactoryBurgers::Presenters::Base when FactoryBurgers::Presenters.present is
-# called with a block. The block is evaluated in the context of a
-# FactoryBurgers::PresenterBuilder instance, which understands the DSL.
-
 module FactoryBurgers
+  # The PresenterBuilder is resposible for building anonymous subclasses of
+  # FactoryBurgers::Presenters::Base when FactoryBurgers::Presenters.present is
+  # called with a block. The block is evaluated in the context of a
+  # FactoryBurgers::PresenterBuilder instance, which understands the DSL.
   class PresenterBuilder < BasicObject
     def initialize(klass)
       @presenter = ::Class.new(::FactoryBurgers::Presenters::Base)
@@ -17,12 +16,6 @@ module FactoryBurgers
 
     def presents(name)
       @presetner.presents(name)
-    end
-
-    def type(&blk)
-      @presenter.define_method(:type) do
-        blk.call(object)
-      end
     end
 
     def type(&blk)
