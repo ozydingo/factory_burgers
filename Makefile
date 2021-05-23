@@ -15,7 +15,7 @@ test: rubocop eslint rspec
 clean:
 	-rm release.gem
 
-release.gem: clean
+release.gem: test clean
 	gem build factory_burgers.gemspec --output release.gem
 
 gem: release.gem
