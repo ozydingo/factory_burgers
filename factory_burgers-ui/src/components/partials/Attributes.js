@@ -17,7 +17,7 @@ function Traits(props) {
   const { attributes } = props;
 
   const [inputAttributes, setInputAttributes] = useState([]);
-  const remainingAttributes = useMemo(() => attrDiff(attributes, inputAttributes));
+  const remainingAttributes = useMemo(() => attrDiff(attributes, inputAttributes), [attributes, inputAttributes]);
 
   const remainingAttributeOptions = remainingAttributes.map(attr => (
     <option key={attr.name} value={attr.name}>{attr.name}</option>

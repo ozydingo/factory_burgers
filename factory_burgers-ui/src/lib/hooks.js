@@ -23,7 +23,7 @@ export function useRemoteData(loadFn, dependencies = []) {
   useEffect(() => {
     setFetching(true);
     asyncFetch().then(setResponse).catch(setError).then(done);
-  }, dependencies);
+  }, dependencies); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function asyncFetch() {
     return loadFn();

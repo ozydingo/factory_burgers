@@ -15,7 +15,6 @@ import { factoryShape } from "lib/shapes";
 import { indexBy, usePrevious } from "./framework";
 
 function FactoryForm(props) {
-  const blueprints = props.blueprints || [];
   const owner = props.owner;
   const inquiry = props.inquiry || "What'll it be?";
 
@@ -26,10 +25,11 @@ function FactoryForm(props) {
     setFactoryInput(value);
   }
 
+  const blueprints = useMemo(() => props.blueprints || [], [props.blueprints]);
   const indexedBluePrints = useMemo(() => indexBy(blueprints, blueprint => blueprint.factory.name), [blueprints]);
-  const selectedBlueprint = useMemo(() => indexedBluePrints[factoryInput], [factoryInput]);
-  const attributes = useMemo(() => selectedBlueprint && selectedBlueprint.factory.attributes || [], [selectedBlueprint]);
-  const traits = useMemo(() => selectedBlueprint && selectedBlueprint.factory.traits || [], [selectedBlueprint]);
+  const selectedBlueprint = useMemo(() => indexedBluePrints[factoryInput], [factoryInput, indexedBluePrints]);
+  const attributes = useMemo(() => (selectedBlueprint && selectedBlueprint.factory.attributes) || [], [selectedBlueprint]);
+  const traits = useMemo(() => (selectedBlueprint && selectedBlueprint.factory.traits) || [], [selectedBlueprint]);
   const validSelection = !!selectedBlueprint;
 
   const prevOwner = usePrevious(props.owner);
@@ -39,12 +39,12 @@ function FactoryForm(props) {
     const ownerId = owner && owner.id;
     const otherOwnerType = other && other.type;
     const otherOwnerId = other && other.id;
-    return ownerType === otherOwnerType && ownerId == otherOwnerId;
+    return ownerType === otherOwnerType && ownerId === otherOwnerId;
   }
 
   useEffect(() => {
     if (!sameOwner(props.owner, prevOwner)) { setFactoryInput(""); }
-  }, [props.owner]);
+  }, [props.owner, prevOwner]);
 
   const form = useRef(null);
 

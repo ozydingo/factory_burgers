@@ -12,14 +12,14 @@ function FormFieldsForOwner(props) {
       <Form.Group controlId="factories.OwnerType">
         <Form.Control
           type="hidden"
-          value={owner && owner.type || ""}
+          value={(owner && owner.type) || ""}
           name="owner_type"
         />
       </Form.Group>
       <Form.Group controlId="factories.OwnerId">
         <Form.Control
           type="hidden"
-          value={owner && owner.id || ""}
+          value={(owner && owner.id) || ""}
           name="owner_id"
         />
       </Form.Group>

@@ -47,7 +47,7 @@ function Factories(props) {
       item => findAssociationFactory(factories, item)
     );
     return matchingFactories;
-  }, [selectedObject]);
+  }, [factories, selectedObject]);
 
   const blueprints = selectedObject ? associationFactories : factoryList;
   const inquiry = selectedObject ? `Would you like fries with that ${selectedObject.type}?` : null;
@@ -122,9 +122,7 @@ function Factories(props) {
   }
 
   function formData(form) {
-    const data = new FormData(form);
-    data.append("authenticity_token", props.csrfToken);
-    return data;
+    return new FormData(form);
   }
 
   return (
@@ -169,7 +167,6 @@ function Factories(props) {
 }
 
 Factories.propTypes = {
-  csrfToken: PropTypes.string,
   factories: PropTypes.arrayOf(factoryShape),
   submitPath: PropTypes.string,
 };
