@@ -1,4 +1,7 @@
 /*.gem
 
+Gemfile.lock
+package-lock.json
+
 .byebug_history
 .DS_Store
