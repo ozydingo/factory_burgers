@@ -24,8 +24,8 @@ module FactoryBurgers
         factory = params.fetch("factory")
         traits = params["traits"]&.keys
         attributes = attribute_overrides(params["attributes"])
-        owner = get_resource_owner(params[:owner_type], params[:owner_id])
-        return FactoryBurgers::Builder.new(owner).build(factory, traits, attributes, as: params[:owner_association])
+        owner = get_resource_owner(params["owner_type"], params["owner_id"])
+        return FactoryBurgers::Builder.new(owner).build(factory, traits, attributes, as: params["owner_association"])
       end
 
       def request(env)
@@ -49,7 +49,7 @@ module FactoryBurgers
         klass = owner_type.constantize
         invalid_resource(klass) if !valid_resource?(klass)
 
-        return klass.constantize.find(owner_id)
+        return klass.find(owner_id)
       end
 
       def log_error(error)
