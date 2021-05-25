@@ -24,8 +24,8 @@ module FactoryBurgers
         factory = params.fetch("factory")
         traits = params["traits"]&.keys
         attributes = attribute_overrides(params["attributes"])
-        owner = get_resource_owner(params[:owner_type], params[:owner_id], params[:owner_association])
-        return FactoryBurgers::Builder.new.build(factory, traits, attributes, owner)
+        owner = get_resource_owner(params[:owner_type], params[:owner_id])
+        return FactoryBurgers::Builder.new(owner).build(factory, traits, attributes, as: params[:owner_association])
       end
 
       def request(env)
@@ -43,13 +43,11 @@ module FactoryBurgers
         return attribute_items.map { |attr| [attr["name"], attr["value"]] }.to_h
       end
 
-      # TODO: make params explicit
-      def get_resource_owner(owner_type, owner_id, owner_association)
-        return nil if owner_type.blank? || owner_id.blank? || owner_association.blank?
+      def get_resource_owner(owner_type, owner_id)
+        return nil if owner_type.blank? || owner_id.blank?
 
         klass = owner_type.constantize
-        invalid_build_class(klass) if !valid_build_class?(klass)
-        invalid_association(klass) if !valid_owner?(klass, owner_association)
+        invalid_resource(klass) if !valid_resource?(klass)
 
         return klass.constantize.find(owner_id)
       end
@@ -64,20 +62,12 @@ module FactoryBurgers
 
       private
 
-      def valid_build_class?(klass)
+      def valid_resource?(klass)
         klass < ActiveRecord::Base
       end
 
-      def invalid_build_class(klass)
-        raise "#{klass.name} is not a thing I can build."
-      end
-
-      def valid_association?(klass, assoc_name)
-        klass.reflections.include?(assoc_name)
-      end
-
-      def invalid_association(klass, association)
-        raise "#{association} is not an association for #{klass.name}!"
+      def invalid_resource(klass)
+        raise FactoryBurgers::Errors::InvalidRequestError, "#{klass.name} is not a valid resource."
       end
     end
   end

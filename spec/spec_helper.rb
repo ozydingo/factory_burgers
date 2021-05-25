@@ -11,6 +11,7 @@ require "support/example_presenter"
 require "support/schema"
 
 require "support/models/group"
+require "support/models/profile"
 require "support/models/post"
 require "support/models/star"
 require "support/models/user"

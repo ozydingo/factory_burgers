@@ -7,6 +7,11 @@ ActiveRecord::Schema.define(version: 1) do
     t.integer   :group_id
   end
 
+  create_table :profiles do |t|
+    t.integer :user_id
+    t.string :spirit_animal
+  end
+
   create_table :posts do |t|
     t.integer :author_id
     t.text :body

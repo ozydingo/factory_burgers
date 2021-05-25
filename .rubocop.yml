@@ -19,6 +19,10 @@ Layout/SpaceInsideHashLiteralBraces:
 Naming/RescuedExceptionsVariableName:
   PreferredName: err
 
+# Sometimes a mutli-branch case statement is easier to read
+Metrics/MethodLength:
+  Max: 16
+
 # I hate this rule
 Style/NegatedIf:
   Enabled: false
