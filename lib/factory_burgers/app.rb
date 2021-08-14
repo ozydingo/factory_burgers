@@ -5,14 +5,8 @@ end
 module FactoryBurgers
   # This is the main mounted app, handling all FactoryBugers requests
   App = Rack::Builder.new do
-    map "/data" do
-      run Middleware::Data.new
-    end
-
-    map "/build" do
-      run Middleware::Build.new
-    end
-
+    map("/data") { run Middleware::Data.new }
+    map("/build") { run Middleware::Build.new }
     run Middleware::Static.new
   end
 end
