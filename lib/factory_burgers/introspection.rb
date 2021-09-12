@@ -5,7 +5,7 @@ module FactoryBurgers
     module_function
 
     def factories
-      FactoryBurgers::FactoryBotAdapter.factories.sort_by(&:name)
+      FactoryBurgers.factory_bot_adapter.factories.sort_by(&:name)
     end
 
     # Return a list of factories for a model instance's associations

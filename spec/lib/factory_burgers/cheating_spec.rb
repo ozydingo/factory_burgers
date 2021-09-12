@@ -1,19 +1,19 @@
 describe FactoryBurgers::Cheating do
   describe "discover_sequences" do
     it "detects one sequence attribute defined" do
-      factory = FactoryBurgers::FactoryBotAdapter.factories.find(:factory_with_one_sequence)
+      factory = FactoryBurgers.factory_bot_adapter.factories.find(:factory_with_one_sequence)
       sequences = FactoryBurgers::Cheating.discover_sequences(factory)
       expect(sequences).to eq([:foo_name])
     end
 
     it "detects multiple sequences attribute defined" do
-      factory = FactoryBurgers::FactoryBotAdapter.factories.find(:factory_with_multiple_sequences)
+      factory = FactoryBurgers.factory_bot_adapter.factories.find(:factory_with_multiple_sequences)
       sequences = FactoryBurgers::Cheating.discover_sequences(factory)
       expect(Set.new(sequences)).to eq(Set.new(%i[bar_name baz_name qux_name]))
     end
 
     it "detects no sequence attributes defined" do
-      factory = FactoryBurgers::FactoryBotAdapter.factories.find(:factory_without_sequences)
+      factory = FactoryBurgers.factory_bot_adapter.factories.find(:factory_without_sequences)
       sequences = FactoryBurgers::Cheating.discover_sequences(factory)
       expect(sequences).to eq([])
     end

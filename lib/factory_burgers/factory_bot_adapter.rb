@@ -1,9 +1,9 @@
 module FactoryBurgers
   # Wrap FactoryBot knowledge, eventually switch on version
-  module FactoryBotAdapter
-    module_function
-
-    @loaded = false
+  class FactoryBotAdapter
+    def initialize
+      @loaded = false
+    end
 
     def ensure_loaded
       load_factories if !@loaded
@@ -28,7 +28,7 @@ module FactoryBurgers
 
     def adapter
       # TODO: support non-v6 versions
-      FactoryBotAdapter::FactoryBotV6
+      @adapter ||= FactoryBotAdapters::FactoryBotV6.new
     end
 
     def load_factories
@@ -46,13 +46,11 @@ module FactoryBurgers
     end
   end
 
-  module FactoryBotAdapter
+  module FactoryBotAdapters
     #:nodoc:
-    module FactoryBotV6
-      module_function
-
+    class FactoryBotV6
       def load_factories
-        FactoryBurgers::FactoryBotAdapter.factory_bot.reload
+        FactoryBot.reload
       end
 
       def factories
