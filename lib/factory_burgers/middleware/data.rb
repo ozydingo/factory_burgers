@@ -5,7 +5,7 @@ module FactoryBurgers
     # Respond with factory data to display in the main form
     class Data
       def call(*)
-        factories = FactoryBot.factories.sort_by(&:name)
+        factories = FactoryBurgers::FactoryBotAdapter.factories.sort_by(&:name)
         factory_data = factories.map { |factory| factory_data(factory) }
         return [200, {"Content-Type" => "application/json"}, [JSON.dump(factory_data)]]
       end
