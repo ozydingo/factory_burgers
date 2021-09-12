@@ -5,5 +5,3 @@ begin
 rescue LoadError
   raise LoadError, "Could not load factory_bot. Please make sure it is installed."
 end
-
-FactoryBurgers::FactoryBotAdapter.load_factories
