@@ -10,5 +10,9 @@ module FactoryBurgers
     def root
       @root ||= Pathname(__dir__).expand_path
     end
+
+    def factory_bot_adapter
+      @factory_bot_adapter ||= FactoryBotAdapter.new
+    end
   end
 end
