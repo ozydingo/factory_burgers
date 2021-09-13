@@ -6,7 +6,10 @@ module FactoryBurgers
     end
 
     def ensure_loaded
-      load_factories if !@loaded
+      if !@loaded
+        load_factories
+        FactoryBurgers.run_initializers
+      end
       @loaded = true
     end
 
