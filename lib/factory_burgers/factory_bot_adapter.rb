@@ -15,7 +15,7 @@ module FactoryBurgers
     end
 
     def version
-      factory_boy::VERSION
+      factory_bot::VERSION
     end
 
     def numeric_version
@@ -23,7 +23,7 @@ module FactoryBurgers
     end
 
     def major_version
-      numeric_versionnn.first
+      numeric_version.first
     end
 
     def adapter
