@@ -137,8 +137,12 @@ Unfortunately, this is problematic for our use case, as we're creating persisted
 To get around this, `FactoryBot` provide a `FactoryBurgers::Cheating` module, that allows you to specific sequences you wish to advance. To use it, pass the sequence name, the class that contains the uniqueness validation or constraint, and the name of the field on which that validation lives. For example:
 
 ```ruby
-FactoryBurgers::Cheating.advance_sequence(:user_login, User, :login)
+FactoryBurgers.loaded do
+  FactoryBurgers::Cheating.advance_sequence(:user_login, User, :login)
+end
 ```
+
+I recommend placing this code in an initializer, such as `config/initializers/factory_burgers.rb` for Rails projects. The `FactoryBurgers.loaded` method allows the code passed in the block to be deferred until the first factory is invoked. This is often necessary for advancing sequences as this operation often requires the full application environment to be loaded, and this is not guaranteed when this code is ex
 
 `FactoryBot` will use some [Ruby trickery](lib/factory_burgers/sequence_cheater.rb) to detect how your sequence is defined and what it produces, will query the database for matching values, and advance the sequence as far as it detects is necessary to avoid uniqueness violations.
 
