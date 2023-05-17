@@ -12,6 +12,10 @@ module FactoryBurgers
         @factory = factory
       end
 
+      def valid?
+        build_class.present?
+      end
+
       def to_h
         {
           name: name,
@@ -45,6 +49,9 @@ module FactoryBurgers
 
       def build_class
         factory.build_class
+      rescue NameError
+        # Some usages of factories include pseudo "abstract" factory parent classes that do not point to a real class
+        nil
       end
 
       def settable_columns
