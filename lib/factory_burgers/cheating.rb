@@ -28,8 +28,12 @@ module FactoryBurgers
     # might break this.
     def advance_sequence(name, klass, column, sql: nil, regex: nil)
       sequence = FactoryBot::Internal.sequences.find(name)
-      sql ||= sql_condition(sequence, column)
-      regex ||= regex_pattern(sequence)
+
+      # This proc is defined by the block used in the sequence definition
+      # This may be fragile, but may also be out only option
+      sequence_proc = sequence.instance_variable_get(:@proc)
+      sql ||= sql_condition(sequence_proc, column)
+      regex ||= regex_pattern(sequence_proc)
 
       highest = find_highest_index_value(klass, column, sql, regex) or return nil
       highest.times { FactoryBot.generate name }
@@ -39,8 +43,12 @@ module FactoryBurgers
       factory = FactoryBot::Internal.factories.find(factory_name)
       attribute = factory.definition.declarations.find { |d| d.name == attribute_name }
 
-      sql = sql_condition(sequence, column)
-      regex = regex_pattern(sequence)
+      # This block is defined by the block used in the sequence definition
+      # This may be fragile, but may also be out only option
+      proc = attribute.send(:block)
+
+      sql = sql_condition(proc, column)
+      regex = regex_pattern(proc)
 
       highest = find_highest_index_value(klass, column, sql, regex) or return nil
       highest.times { FactoryBot::Evaluator.new(:build).instance_eval(&attribute.send(:block)) }
@@ -62,10 +70,7 @@ module FactoryBurgers
     # the SQL fragemnt "<name> like 'foo%'"
     # TODO: does this work in pg, sqlite?
     # TODO: support mongo as well
-    def sql_condition(sequence, column)
-      # This proc is defined by the block used in the sequence definition
-      # This may be fragile, but may also be out only option
-      proc = sequence.instance_variable_get(:@proc)
+    def sql_condition(proc, column)
       injector = SequenceInjector.new("%")
       sql_value = proc.call(injector)
       return "#{column} like '#{sql_value}'"
