@@ -4,7 +4,7 @@ Dir[Pathname(__dir__).join("factory_burgers/**/*.rb")].sort.each do |file|
   require file
 end
 
-#:nodoc:
+# :nodoc:
 module FactoryBurgers
   class << self
     delegate :run_initializers, to: :initializer

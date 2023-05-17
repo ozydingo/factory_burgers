@@ -40,7 +40,7 @@ module FactoryBurgers
         return [] if attribute_items.nil?
 
         attribute_items = attribute_items.select { |attr| attr["name"].present? }
-        return attribute_items.map { |attr| [attr["name"], attr["value"]] }.to_h
+        return attribute_items.to_h { |attr| [attr["name"], attr["value"]] }
       end
 
       def get_resource_owner(owner_type, owner_id)

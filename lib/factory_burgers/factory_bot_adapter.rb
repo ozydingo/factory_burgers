@@ -50,7 +50,7 @@ module FactoryBurgers
   end
 
   module FactoryBotAdapters
-    #:nodoc:
+    # :nodoc:
     class FactoryBotV6
       def load_factories
         FactoryBot.reload

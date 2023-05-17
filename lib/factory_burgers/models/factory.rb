@@ -21,8 +21,8 @@ module FactoryBurgers
         }
       end
 
-      def to_json(*opts, &blk)
-        to_h.to_json(*opts, &blk)
+      def to_json(...)
+        to_h.to_json(...)
       end
 
       def name
@@ -56,7 +56,7 @@ module FactoryBurgers
       end
     end
 
-    #:nodoc:
+    # :nodoc:
     class Attribute
       attr_reader :column
 
@@ -68,8 +68,8 @@ module FactoryBurgers
         {name: name}
       end
 
-      def to_json(*opts, &blk)
-        to_h.to_json(*opts, &blk)
+      def to_json(...)
+        to_h.to_json(...)
       end
 
       def name
@@ -77,7 +77,7 @@ module FactoryBurgers
       end
     end
 
-    #:nodoc:
+    # :nodoc:
     class Trait
       attr_reader :trait
 
@@ -89,8 +89,8 @@ module FactoryBurgers
         {name: name}
       end
 
-      def to_json(*opts, &blk)
-        to_h.to_json(*opts, &blk)
+      def to_json(...)
+        to_h.to_json(...)
       end
 
       def name

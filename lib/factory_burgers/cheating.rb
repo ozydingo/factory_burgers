@@ -36,7 +36,7 @@ module FactoryBurgers
     end
 
     def find_highest_index_value(klass, column, sql, regex)
-      matches = klass.where(sql).pluck(column).select { |val| val =~ regex }
+      matches = klass.where(sql).pluck(column).grep(regex)
       return matches.map { |value| value =~ regex && Regexp.last_match(1) }.map(&:to_i).max
     end
 
