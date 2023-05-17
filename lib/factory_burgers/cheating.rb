@@ -47,7 +47,7 @@ module FactoryBurgers
       # This may be fragile, but may also be out only option
       proc = attribute.send(:block)
 
-      sql = sql_condition(proc, column)
+      sql = sql_condition(proc, attribute_name)
       regex = regex_pattern(proc)
 
       highest = find_highest_index_value(klass, column, sql, regex) or return nil
