@@ -32,7 +32,18 @@ module FactoryBurgers
       regex ||= regex_pattern(sequence)
 
       highest = find_highest_index_value(klass, column, sql, regex) or return nil
-      highest&.times { FactoryBot.generate name }
+      highest.times { FactoryBot.generate name }
+    end
+
+    def advance_sequence_attribute(factory_name, attribute_name)
+      factory = FactoryBot::Internal.factories.find(factory_name)
+      attribute = factory.definition.declarations.find { |d| d.name == attribute_name }
+
+      sql = sql_condition(sequence, column)
+      regex = regex_pattern(sequence)
+
+      highest = find_highest_index_value(klass, column, sql, regex) or return nil
+      highest.times { FactoryBot::Evaluator.new(:build).instance_eval(&attribute.send(:block)) }
     end
 
     def find_highest_index_value(klass, column, sql, regex)
