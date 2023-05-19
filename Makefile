@@ -13,6 +13,8 @@ eslint:
 
 test: rubocop eslint rspec
 
+test_all: -rubocop -eslint -rspec
+
 assets:
 	cd factory_burgers-ui; npm run build
 
@@ -26,3 +28,6 @@ gem: factory_burgers-$(VERSION).gem
 
 publish: assets test factory_burgers-$(VERSION).gem
 	gem push factory_burgers-$(VERSION).gem
+
+-%:
+	-@$(MAKE) $*

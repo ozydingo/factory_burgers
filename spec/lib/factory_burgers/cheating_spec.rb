@@ -26,7 +26,7 @@ describe FactoryBurgers::Cheating do
       allow(klass).to receive(:pluck).with(:foo).and_return(%w[foo1 foo5])
 
       FactoryBurgers::Cheating.advance_sequence(:sequence, klass, :foo)
-      next_foo = FactoryBot.generate(:sequence)
+      next_foo = generate(:sequence)
       expect(next_foo).to eq("foo6")
     end
 

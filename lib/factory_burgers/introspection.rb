@@ -23,6 +23,9 @@ module FactoryBurgers
     def factories_for_class(klass)
       factories.select do |factory|
         factory.build_class.ancestors.include?(klass)
+      rescue NameError
+        # Some usages of factories include pseudo "abstract" factory parent classes that do not point to a real class
+        false
       end
     end
 

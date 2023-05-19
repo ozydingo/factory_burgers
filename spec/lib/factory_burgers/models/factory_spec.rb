@@ -20,6 +20,18 @@ describe FactoryBurgers::Models::Factory do
     expect(blueprint.attributes.map(&:name)).to include("name")
   end
 
+  describe "valid?" do
+    it "is true for a regular factory" do
+      expect(blueprint).to be_valid
+    end
+
+    it "is false when the factory class is not defined" do
+      factory = FactoryBot::Internal.factories.find(:phony)
+      blueprint = FactoryBurgers::Models::Factory.new(factory)
+      expect(blueprint).not_to be_valid
+    end
+  end
+
   describe "to_h" do
     it "converts to a Hash" do
       expect(blueprint.to_h).to include({name: "user", class_name: "User"})

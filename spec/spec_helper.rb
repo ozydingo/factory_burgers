@@ -1,6 +1,7 @@
 require "active_record"
 require "byebug"
 require "factory_bot"
+require 'pathname'
 require "rack"
 
 require "factory_burgers"
