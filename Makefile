@@ -1,6 +1,6 @@
 VERSION := $(shell ruby -r ./lib/factory_burgers/version.rb -e 'print FactoryBurgers::VERSION')
 
-.PHONY: rspec rubocop eslint assets test gem clean publish
+.PHONY: rspec rubocop eslint assets test gem clean publish setup_env
 
 rspec:
 	rspec
@@ -28,6 +28,11 @@ gem: factory_burgers-$(VERSION).gem
 
 publish: assets test factory_burgers-$(VERSION).gem
 	gem push factory_burgers-$(VERSION).gem
+
+setup_env:
+	gem install bundler
+	bundle install
+	cd factory_burgers-ui; npm install
 
 -%:
 	-@$(MAKE) $*
