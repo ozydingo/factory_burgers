@@ -56,18 +56,17 @@ At this point you can select any of the ordered objects and repeat the process a
 
 ![Main Page](docs/images/selected.png)
 
-
 Click "Start Over" to clear the orders from the page, but the objects will still be persisted in your database.
 
 ## Customization
 
-In the example above, the `Comment` model is using the default data presenter, which displays an object's `id` and `name`, if it has one, field. The `Post` model, however, uses a custom presenter that displays  more information and provided a link to that resource in your application. That's a tasty burger!
+In the example above, the `Comment` model is using the default data presenter, which displays an object's `id` and `name`, if it has one, field. The `Post` model, however, uses a custom presenter that displays more information and provided a link to that resource in your application. That's a tasty burger!
 
 You can define custom presenters using a block or a class. In both cases, your may define:
 
-* `type`: What is this object? This string will be display at the top of each card in the UI. Default: the object's class name.
-* `attributes`: What data to display for this object. These can be anything you want, including derived data (they don't need to just be attributes that map to db columns!). Default: a Hash with `id` and `name`, if your object has either or both of these columns.
-* `link_path`: The path to this object in your application. The user can click on a link icon in the card title to open that path in a new tab. Default: `nil` (no link).
+- `type`: What is this object? This string will be display at the top of each card in the UI. Default: the object's class name.
+- `attributes`: What data to display for this object. These can be anything you want, including derived data (they don't need to just be attributes that map to db columns!). Default: a Hash with `id` and `name`, if your object has either or both of these columns.
+- `link_path`: The path to this object in your application. The user can click on a link icon in the card title to open that path in a new tab. Default: `nil` (no link).
 
 To use a custom presenter, use one of the two forms of `FactoryBurgers::Presenters.present`. A good place to put this code is in `config/initializers/factory_burgers.rb`
 
@@ -81,7 +80,7 @@ FactoryBurgers::Presenters.present("Post") do
     {
       id: post.id,
       author_id: post.author_id,
-      word_ccount: post.body.split(/\s+/).count,
+      word_count: post.body.split(/\s+/).count,
     }
   end
 
@@ -166,9 +165,9 @@ Located at [factory_burgers-ui](factory_burgers-ui), the UI is built in React wi
 
 The faithful code taking your orders and handing you your fries are Rack middleware applications located at [lib/factory_burgers/middleware](lib/factory_burgers/middleware).
 
-* `FactoryBurgers::Middleware::Static` serves the built front-end assets using `Rack::Static`
-* `FactoryBurgers::Middleware::Data` provides the first page with the data it needs to present the menu options to the user.
-* `FactoryBurgers::Middleware::Build` handles the orders and returns association data in the response.
+- `FactoryBurgers::Middleware::Static` serves the built front-end assets using `Rack::Static`
+- `FactoryBurgers::Middleware::Data` provides the first page with the data it needs to present the menu options to the user.
+- `FactoryBurgers::Middleware::Build` handles the orders and returns association data in the response.
 
 ### Test Apps
 
