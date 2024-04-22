@@ -20,7 +20,7 @@ function Traits(props) {
             type="checkbox"
             disabled={props.disabled}
             id={trait.name}
-            name={`traits[${trait.name}`}
+            name={`traits[${trait.name}]`}
             label={trait.name}
           />
         ))}
