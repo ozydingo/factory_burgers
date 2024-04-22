@@ -16,7 +16,7 @@ test: rubocop eslint rspec
 test_all: -rubocop -eslint -rspec
 
 assets:
-	cd factory_burgers-ui; npm run build
+	cd factory_burgers-ui; npm install; npm run build
 
 clean:
 	-rm factory_burgers-$(VERSION).gem
